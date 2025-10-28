@@ -1,62 +1,131 @@
+/* ======== ESTILO GERAL ======== */
 body {
-  font-family: Arial, sans-serif;
-  background-color: #0b0c10;
-  color: #c5c6c7;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background-color: #030423;
+  color: #e0e0e0;
   margin: 0;
   padding: 0;
 }
 
+/* ======== CABEÇALHO ======== */
 header {
-  background-color: #1f2833;
-  color: #66fcf1;
+  background: linear-gradient(90deg, #0a0b2a 0%, #0b0c3b 50%, #0a0b2a 100%);
+  color: #f7931e;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 30px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+  padding: 18px 40px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  border-bottom: 2px solid #f7931e;
 }
 
 h1 {
   margin: 0;
+  font-weight: 700;
+  font-size: 1.8rem;
+  letter-spacing: 1px;
+  text-shadow: 0 0 8px rgba(247, 147, 30, 0.6);
 }
 
+/* ======== BOTÕES ======== */
 button {
-  background-color: #45a29e;
+  background-color: #f7931e;
   color: #fff;
   border: none;
-  padding: 8px 14px;
-  border-radius: 4px;
+  padding: 10px 18px;
+  border-radius: 6px;
   cursor: pointer;
-  transition: 0.3s;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(247, 147, 30, 0.4);
 }
 
 button:hover {
-  background-color: #66fcf1;
-  color: #0b0c10;
+  background-color: #ff9f3c;
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(247, 147, 30, 0.6);
 }
 
+/* ======== SEÇÃO DE PRODUTOS ======== */
 .produtos {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  padding: 30px;
-  gap: 20px;
+  padding: 50px 20px;
+  gap: 25px;
 }
 
+/* ======== CARD DE PRODUTO ======== */
 .produto {
-  background-color: #1f2833;
-  border-radius: 10px;
-  padding: 15px;
-  width: 220px;
+  background: linear-gradient(180deg, #0d0e35, #1b1c4a);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 18px;
+  width: 230px;
   text-align: center;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  position: relative;
+  overflow: hidden;
+}
+
+.produto::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(120deg, rgba(247, 147, 30, 0.15), transparent);
+  transform: skewX(-25deg);
+  transition: 0.6s;
+}
+
+.produto:hover::before {
+  left: 125%;
 }
 
 .produto:hover {
-  transform: translateY(-5px);
+  transform: translateY(-6px);
+  box-shadow: 0 6px 20px rgba(247, 147, 30, 0.25);
 }
 
+/* ======== IMAGENS ======== */
 .produto img {
   border-radius: 10px;
   max-width: 100%;
+  height: 180px;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+/* ======== TÍTULO E PREÇO ======== */
+.produto h2 {
+  color: #ffffff;
+  font-size: 1.1rem;
+  margin-bottom: 6px;
+}
+
+.produto p {
+  color: #00aaff;
+  font-weight: bold;
+  margin-bottom: 12px;
+  font-size: 1rem;
+}
+
+/* ======== ROLAGEM ======== */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #030423;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #f7931e;
+  border-radius: 10px;
 }
