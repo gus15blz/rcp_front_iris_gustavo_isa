@@ -3,19 +3,305 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TechStore - Eletrônicos</title>
+  <title>TechStore - Eletrônicos e Gaming</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
   <header>
-    <h1>TechStore</h1>
-    <button id="carrinho">🛒 Carrinho (0)</button>
+    <div class="logo-container">
+      <img src="img/WhatsApp Image 2025-10-24 at 20.23.51.jpeg" alt="Logo TechStore" class="logo">
+      <h1>TechStore</h1>
+    </div>
+    <div class="header-buttons">
+      <a href="suporte.html" class="btn-suporte-header">💬 Suporte</a>
+      <button id="btn-login-header" class="btn-login-header">🔐 Login</button>
+      <button id="carrinho">🛒 Carrinho (<span id="contador-carrinho">0</span>)</button>
+    </div>
   </header>
 
+  <!-- Banner Carrossel de Propaganda -->
+  <div class="banner-carrossel-fixo" id="banner-carrossel">
+    <button class="btn-carrossel btn-anterior" id="btn-anterior">‹</button>
+    <button class="btn-carrossel btn-proximo" id="btn-proximo">›</button>
+    
+    <div class="carrossel-container">
+      <div class="carrossel-slide active">
+        <div class="propaganda-content propaganda-1">
+          <div class="banner-left">
+            <h2>🎮 Mega Promoção Gaming!</h2>
+            <p>Até 50% OFF em produtos gamers</p>
+            <span class="destaque">Aproveite já!</span>
+          </div>
+          <div class="banner-right">
+            <div class="banner-decorativo">
+              <div class="icone-gamer">🎮</div>
+              <div class="particulas">
+                <span class="particula"></span>
+                <span class="particula"></span>
+                <span class="particula"></span>
+                <span class="particula"></span>
+                <span class="particula"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="carrossel-slide">
+        <div class="propaganda-content propaganda-2">
+          <div class="banner-left">
+            <h2>💻 Black Friday Tech!</h2>
+            <p>Os melhores preços em tecnologia</p>
+            <span class="destaque">Frete grátis!</span>
+          </div>
+          <div class="banner-right">
+            <div class="banner-decorativo">
+              <div class="icone-gamer">💻</div>
+              <div class="particulas">
+                <span class="particula"></span>
+                <span class="particula"></span>
+                <span class="particula"></span>
+                <span class="particula"></span>
+                <span class="particula"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="carrossel-slide">
+        <div class="propaganda-content propaganda-3">
+          <div class="banner-left">
+            <h2>🎯 Cashback de 10%</h2>
+            <p>Compre agora e ganhe cashback</p>
+            <span class="destaque">Válido até domingo!</span>
+          </div>
+          <div class="banner-right">
+            <div class="banner-decorativo">
+              <div class="icone-gamer">🎯</div>
+              <div class="particulas">
+                <span class="particula"></span>
+                <span class="particula"></span>
+                <span class="particula"></span>
+                <span class="particula"></span>
+                <span class="particula"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="carrossel-indicadores">
+      <span class="indicador active" data-slide="0"></span>
+      <span class="indicador" data-slide="1"></span>
+      <span class="indicador" data-slide="2"></span>
+    </div>
+  </div>
+
   <main>
-    <section class="produtos" id="lista-produtos"></section>
+    <aside class="sidebar-filtros">
+      <h3>🔍 Filtros</h3>
+      <div class="filtro-categoria">
+        <h4>Categorias</h4>
+        <label class="filtro-item">
+          <input type="checkbox" class="filtro-checkbox" value="all" checked>
+          <span>Todos</span>
+        </label>
+        <label class="filtro-item">
+          <input type="checkbox" class="filtro-checkbox" value="Notebooks">
+          <span>💻 Notebooks</span>
+        </label>
+        <label class="filtro-item">
+          <input type="checkbox" class="filtro-checkbox" value="Periféricos">
+          <span>🖱️ Periféricos</span>
+        </label>
+        <label class="filtro-item">
+          <input type="checkbox" class="filtro-checkbox" value="Monitores">
+          <span>🖥️ Monitores</span>
+        </label>
+        <label class="filtro-item">
+          <input type="checkbox" class="filtro-checkbox" value="Hardware">
+          <span>⚙️ Hardware</span>
+        </label>
+        <label class="filtro-item">
+          <input type="checkbox" class="filtro-checkbox" value="Consoles">
+          <span>🎮 Consoles</span>
+        </label>
+        <label class="filtro-item">
+          <input type="checkbox" class="filtro-checkbox" value="Móveis">
+          <span>🪑 Móveis</span>
+        </label>
+      </div>
+      <button class="btn-limpar-filtros" id="limpar-filtros">Limpar Filtros</button>
+    </aside>
+    
+    <section class="conteudo-produtos">
+      <div class="produtos" id="lista-produtos"></div>
+    </section>
   </main>
+
+  <!-- Modal do Carrinho -->
+  <div class="modal-carrinho" id="modal-carrinho">
+    <div class="modal-carrinho-content">
+      <div class="modal-carrinho-header">
+        <h2>🛒 Seu Carrinho</h2>
+        <button class="btn-fechar-carrinho" id="fechar-carrinho">&times;</button>
+      </div>
+      <div class="modal-carrinho-body" id="carrinho-items">
+        <div class="carrinho-vazio">
+          <p>😔 Seu carrinho está vazio</p>
+          <p>Adicione produtos para começar!</p>
+        </div>
+      </div>
+      <div class="modal-carrinho-footer" id="carrinho-footer" style="display: none;">
+        <div class="carrinho-total">
+          <span>Total: <strong id="carrinho-total">R$ 0,00</strong></span>
+        </div>
+        <button class="btn-finalizar-compra" id="finalizar-compra">Finalizar Compra</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Detalhes do Produto -->
+  <div class="modal-produto" id="modal-produto">
+    <div class="modal-produto-content">
+      <button class="btn-fechar-produto" id="fechar-produto">&times;</button>
+      <div class="modal-produto-body" id="modal-produto-body">
+        <!-- Conteúdo será inserido via JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Confirmação de Compra -->
+  <div class="modal-confirmar-compra" id="modal-confirmar-compra">
+    <div class="modal-confirmar-content">
+      <div class="confirmar-header">
+        <h2>🔔 Confirmar Compra</h2>
+        <button class="btn-fechar-confirmar" id="fechar-confirmar-compra">&times;</button>
+      </div>
+      <div class="confirmar-body">
+        <div class="confirmar-resumo" id="confirmar-resumo">
+          <!-- Resumo será inserido via JavaScript -->
+        </div>
+        <div class="confirmar-total">
+          <span class="confirmar-label">Total a pagar:</span>
+          <span class="confirmar-valor" id="confirmar-valor-total">R$ 0,00</span>
+        </div>
+        
+        <!-- Métodos de Pagamento -->
+        <div class="metodos-pagamento">
+          <h3 class="metodos-titulo">💳 Método de Pagamento</h3>
+          <div class="metodos-opcoes">
+            <label class="metodo-option" id="opcao-pix">
+              <input type="radio" name="metodo-pagamento" value="pix" checked>
+              <div class="metodo-content">
+                <span class="metodo-icone">🧾</span>
+                <div class="metodo-info">
+                  <span class="metodo-nome">PIX</span>
+                  <span class="metodo-desc">Aprovação instantânea</span>
+                </div>
+                <span class="metodo-check">✓</span>
+              </div>
+            </label>
+            
+            <label class="metodo-option" id="opcao-cartao">
+              <input type="radio" name="metodo-pagamento" value="cartao">
+              <div class="metodo-content">
+                <span class="metodo-icone">💳</span>
+                <div class="metodo-info">
+                  <span class="metodo-nome">Cartão de Crédito</span>
+                  <span class="metodo-desc">Em até 12x sem juros</span>
+                </div>
+                <span class="metodo-check">✓</span>
+              </div>
+            </label>
+            
+            <label class="metodo-option" id="opcao-boleto">
+              <input type="radio" name="metodo-pagamento" value="boleto">
+              <div class="metodo-content">
+                <span class="metodo-icone">📄</span>
+                <div class="metodo-info">
+                  <span class="metodo-nome">Boleto Bancário</span>
+                  <span class="metodo-desc">Vencimento em 3 dias</span>
+                </div>
+                <span class="metodo-check">✓</span>
+              </div>
+            </label>
+          </div>
+        </div>
+        
+        <!-- Área de detalhes do pagamento (dinâmica) -->
+        <div class="detalhes-pagamento" id="detalhes-pagamento">
+          <!-- Conteúdo será inserido via JavaScript conforme o método selecionado -->
+        </div>
+        
+        <p class="confirmar-mensagem">Deseja realmente finalizar esta compra?</p>
+      </div>
+      <div class="confirmar-footer">
+        <button class="btn-cancelar-compra" id="cancelar-compra">Cancelar</button>
+        <button class="btn-confirmar-compra" id="confirmar-compra-btn">Confirmar Compra</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Compra Finalizada -->
+  <div class="modal-compra-finalizada" id="modal-compra-finalizada">
+    <div class="compra-animacao-container">
+      <canvas id="confetti-canvas"></canvas>
+      <div class="compra-sucesso-content">
+        <div class="check-animado">
+          <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+            <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/>
+            <path class="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+          </svg>
+        </div>
+        <h2 class="compra-titulo">Compra Finalizada!</h2>
+        <p class="compra-mensagem" id="compra-mensagem">Obrigado pela sua compra! 🎉</p>
+        <div class="compra-detalhes" id="compra-detalhes">
+          <!-- Detalhes serão inseridos via JavaScript -->
+        </div>
+        <button class="btn-fechar-compra" id="fechar-compra-finalizada">Continuar Comprando</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>TechStore</h3>
+        <p>A melhor loja de eletrônicos e produtos gamers do Brasil!</p>
+      </div>
+      <div class="footer-section">
+        <h4>Contato</h4>
+        <p>📱 (41) 99125-9003</p>
+        <p>✉️ contato@techstore.com.br</p>
+      </div>
+      <div class="footer-section">
+        <h4>Links Rápidos</h4>
+        <ul>
+          <li><a href="#sobre">Sobre Nós</a></li>
+          <li><a href="#contato">Contato</a></li>
+          <li><a href="suporte.html">Suporte</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Redes Sociais</h4>
+        <div class="footer-social">
+          <a href="#" class="social-link">📘 Facebook</a>
+          <a href="#" class="social-link">📷 Instagram</a>
+          <a href="#" class="social-link">🐦 Twitter</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 TechStore. Todos os direitos reservados.</p>
+      <p class="footer-dev">Desenvolvido por: Isabela Tumps, Íris Venzke e Gustavo Bueno</p>
+    </div>
+  </footer>
 
   <script src="script.js"></script>
 </body>
 </html>
+
